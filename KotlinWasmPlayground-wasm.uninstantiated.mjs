@@ -17,19 +17,19 @@ export async function instantiate(imports={}, runInitializer=true) {
 
     
     const js_code = {
-        'kotlin.captureStackTrace_-737944982' : () => new Error().stack,
-        'kotlin.wasm.internal.throwJsError_61200870' : (message, wasmTypeName, stack) => { 
+        'kotlin.captureStackTrace_-1334956621' : () => new Error().stack,
+        'kotlin.wasm.internal.throwJsError_-385587655' : (message, wasmTypeName, stack) => { 
                 const error = new Error();
                 error.message = message;
                 error.name = wasmTypeName;
                 error.stack = stack;
                 throw error;
            },
-        'kotlin.wasm.internal.getJsEmptyString_432546202' : () => '',
-        'kotlin.wasm.internal.getJsTrue_-881169428' : () => true,
-        'kotlin.wasm.internal.getJsFalse_2074916501' : () => false,
-        'kotlin.wasm.internal.stringLength_1684823610' : x => x.length,
-        'kotlin.wasm.internal.jsExportStringToWasm_392747182' :  (src, srcOffset, srcLength, dstAddr) => {
+        'kotlin.wasm.internal.getJsEmptyString_-164465437' : () => '',
+        'kotlin.wasm.internal.getJsTrue_-1478181067' : () => true,
+        'kotlin.wasm.internal.getJsFalse_1477904862' : () => false,
+        'kotlin.wasm.internal.stringLength_1772554682' : x => x.length,
+        'kotlin.wasm.internal.jsExportStringToWasm_271128330' :  (src, srcOffset, srcLength, dstAddr) => {
                 const mem16 = new Uint16Array(wasmExports.memory.buffer, dstAddr, srcLength);
                 let arrayIndex = 0;
                 let srcIndex = srcOffset;
@@ -40,14 +40,14 @@ export async function instantiate(imports={}, runInitializer=true) {
                 }
             }
         ,
-        'kotlin.wasm.internal.importStringFromWasm_2079456365' : (address, length, prefix) => {
+        'kotlin.wasm.internal.importStringFromWasm_-1434832627' : (address, length, prefix) => {
             const mem16 = new Uint16Array(wasmExports.memory.buffer, address, length);
             const str = String.fromCharCode.apply(null, mem16);
             return (prefix == null) ? str : prefix + str;
         }
         ,
-        'kotlin.wasm.internal.externrefToString_577974651' : ref => String(ref),
-        'kotlin.wasm.internal.externrefHashCode_1867702467' : 
+        'kotlin.wasm.internal.externrefToString_871258856' : ref => String(ref),
+        'kotlin.wasm.internal.externrefHashCode_1955433539' : 
         (() => {
         const dataView = new DataView(new ArrayBuffer(8));
         function numberHashCode(obj) {
@@ -97,16 +97,16 @@ export async function instantiate(imports={}, runInitializer=true) {
             }
         }
         })(),
-        'kotlin.wasm.internal.isNullish_-1209232446' : (ref) => ref == null,
-        'kotlin.wasm.internal.tryGetOrSetExternrefBox_$external_fun_-1219487763' : (p0, p1) => tryGetOrSetExternrefBox(p0, p1),
-        'kotlin.js.__callJsClosure_rvovtc_407519157' : (f, p0) => f(p0),
-        'kotlin.js.__callJsClosure_wa9rzt_689839931' : (f, p0) => f(p0),
-        'kotlin.random.initialSeed_1517185921' : () => ((Math.random() * Math.pow(2, 32)) | 0),
-        'kotlinx.browser.document_$external_prop_getter_682957128' : () => document,
-        'org.w3c.dom.body_$external_prop_getter_-2090744371' : (_this) => _this.body,
-        'org.w3c.dom.createTextNode_$external_fun_1745115818' : (_this, p0) => _this.createTextNode(p0),
-        'org.w3c.dom.ownerDocument_$external_prop_getter_811134632' : (_this) => _this.ownerDocument,
-        'org.w3c.dom.appendChild_$external_fun_535191960' : (_this, p0) => _this.appendChild(p0)
+        'kotlin.wasm.internal.isNullish_955678453' : (ref) => ref == null,
+        'kotlin.wasm.internal.tryGetOrSetExternrefBox_$external_fun_903163830' : (p0, p1) => tryGetOrSetExternrefBox(p0, p1),
+        'kotlin.js.__callJsClosure_o0vpnl_-332838811' : (f, p0) => f(p0),
+        'kotlin.js.__callJsClosure_vhne0b_-1225296359' : (f, p0) => f(p0),
+        'kotlin.random.initialSeed_714621149' : () => ((Math.random() * Math.pow(2, 32)) | 0),
+        'kotlinx.browser.document_$external_prop_getter_85945489' : () => document,
+        'org.w3c.dom.body_$external_prop_getter_-1797460166' : (_this) => _this.body,
+        'org.w3c.dom.createTextNode_$external_fun_1649979942' : (_this, p0) => _this.createTextNode(p0),
+        'org.w3c.dom.ownerDocument_$external_prop_getter_1104418837' : (_this) => _this.ownerDocument,
+        'org.w3c.dom.appendChild_$external_fun_-1637123743' : (_this, p0) => _this.appendChild(p0)
     }
     
     // Placed here to give access to it from externals (js_code)
