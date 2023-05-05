@@ -12,17 +12,23 @@ repositories {
 kotlin {
     wasm {
         binaries.executable()
-        browser()
+        browser {
+            webpackTask {
+                outputFileName = "main.js"
+            }
+            runTask {
+                outputFileName = "main.js"
+            }
+        }
         applyBinaryen()
     }
     sourceSets {
-        val commonMain by getting
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
         val wasmMain by getting
-        val wasmTest by getting
     }
+}
+
+// ワークアラウンド
+// https://youtrack.jetbrains.com/issue/KT-57203
+tasks.named("wasmDevelopmentExecutableCompileSync") {
+    dependsOn("wasmBrowserProductionWebpack")
 }
